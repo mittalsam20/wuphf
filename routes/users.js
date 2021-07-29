@@ -41,11 +41,37 @@ router.delete("/:id", async(req, res) => {
     } else {
         return res.status(403).json("You can Delete only your account..!!");
     }
-
 })
 
 //Get User
+
+router.get("/:id", async(req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        // important statment understand it
+        const { password, updatedAt, ...other } = user._doc;
+        res.status(200).json(other);
+    } catch (e) {
+        console.log(e);
+        return res.status(500).json(e)
+    }
+
+})
+
+
+
 //Follow User
+router.put("/:id/follow", async(req, res) => {
+
+    if (req.body.userId !== req.params.id) {
+
+    } else {
+        res.status(403).json("You cant follow yourself");
+    }
+
+})
+
+
 //Unfollow User
 
 
