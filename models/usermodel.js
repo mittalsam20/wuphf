@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
 
-
-
 const UserSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -10,7 +8,6 @@ const UserSchema = new mongoose.Schema({
         max: 30,
         unique: true
     },
-
     email: {
         type: String,
         require: true,
@@ -33,6 +30,17 @@ const UserSchema = new mongoose.Schema({
     },
     followers: {
         type: Array,
-
+        default: []
+    },
+    following: {
+        type: Array,
+        default: []
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false,
     }
-})
+}, { timestamps: true });
+
+
+module.exports = mongoose.model("User", UserSchema);
