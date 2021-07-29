@@ -24,7 +24,7 @@ app.use(morgan("common"));
 // API Calling
 app.use("/api/user", userRoute);
 app.use("/api/auth", authRoute);
-app.use("/api/auth", postRoute);
+app.use("/api/posts", postRoute);
 
 
 
