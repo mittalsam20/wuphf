@@ -4,9 +4,11 @@ const dotenv = require("dotenv");
 const helmet = require("helmet");
 const cors = require("cors");
 const morgan = require("morgan")
-const userRoute = require("./routes/users")
 const app = express();
 const port = process.env.PORT || 5000;
+
+const userRoute = require("./routes/users")
+const authRoute = require("./routes/auth")
 
 
 dotenv.config();
@@ -22,5 +24,8 @@ app.use(morgan("common"));
 
 // API Calling
 app.use("/api/user", userRoute)
+app.use("/api/auth", authRoute)
+
+
 
 app.listen(port, () => { console.log(`Server started listening at port: ${port}`) })
