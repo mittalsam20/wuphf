@@ -66,7 +66,7 @@ router.put("/:id/like", async(req, res) => {
 //get a Post
 router.get("/:id", async(req, res) => {
     try {
-        const post = Post.findById(req.params.id);
+        const post = await Post.findById(req.params.id);
         res.status(200).json(post);
     } catch (e) {
         console.log(e);
@@ -75,6 +75,21 @@ router.get("/:id", async(req, res) => {
 })
 
 //get timelines Post
+router.get("/timeline/all", async(req, res) => {
+    try {
+        const currentUser = await User.findById(req.body.userId);
+        const userPosts = await Post.find({ userId: currentUser._id });
+        const friendPosts = await Promise.all(
+            currentUser.followings.map(freindId => {
+                return (Post.find({ userId: freindId }));
+            })
+        )
+        res.json(userPosts.concat(...friendPosts));
+    } catch (e) {
+        console.log(e);
+        res.status(500).json(e)
+    }
+})
 
 
 
