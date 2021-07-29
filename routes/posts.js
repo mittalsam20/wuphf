@@ -18,17 +18,14 @@ router.post("/", async(req, res) => {
 
 //Update a Post
 router.put("/:id", async(req, res) => {
-    const post = Post.findById(req.params.id);
-    if (post.userId === req.body.userId) {
-        await post.updateOne({ $set: req.body });
-        res.status(200).json("The post has been updated")
-    } else {
-        res.status(403).json("You can Update only your post")
-    }
     try {
-
-
-
+        const post = Post.findById(req.params.id);
+        if (post.userId === req.body.userId) {
+            await post.updateOne({ $set: req.body });
+            res.status(200).json("The post has been updated")
+        } else {
+            res.status(403).json("You can Update only your post")
+        }
     } catch (e) {
         console.log(e);
         res.status(500).json(e)
