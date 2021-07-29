@@ -1,0 +1,26 @@
+const express = require("express");
+const mongoose = require("mongoose")
+const dotenv = require("dotenv");
+const helmet = require("helmet");
+const cors = require("cors");
+const morgan = require("morgan")
+const userRoute = require("./routes/users")
+const app = express();
+const port = process.env.PORT || 5000;
+
+
+dotenv.config();
+
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useFindAndModify: true, useCreateIndex: true, useUnifiedTopology: true },
+    () => console.log("Database Connected successfully..!!"))
+
+
+//Middleware
+app.use(express.json());
+app.use(helmet());
+app.use(morgan("common"));
+
+// API Calling
+app.use("/api/user", userRoute)
+
+app.listen(port, () => { console.log(`Server started listening at port: ${port}`) })
