@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/usermodel");
 const bcrypt = require("bcrypt");
+const { findById } = require("../models/usermodel");
 
 
 //Update User
@@ -53,7 +54,7 @@ router.get("/:id", async(req, res) => {
         res.status(200).json(other);
     } catch (e) {
         console.log(e);
-        return res.status(500).json(e)
+        return res.status(500).json(e);
     }
 
 })
@@ -62,17 +63,45 @@ router.get("/:id", async(req, res) => {
 
 //Follow User
 router.put("/:id/follow", async(req, res) => {
-
     if (req.body.userId !== req.params.id) {
-
+        try {
+            const user = await findById(req.params.id);
+            const currentUser = await User.findById(req.body.userId);
+            if (!user.followers.includes(req.body.userId)) {
+                await user.updateOne({ $push: { followers: req.body.userId } });
+                await currentUser.updateOne({ $push: { followings: req.params.id } });
+                res.status(200).json("user has been followed")
+            } else { res.status(403).json("you allReady follow this user..!!") }
+        } catch (e) {
+            console.log(e);
+            return res.status(500).json(e);
+        }
     } else {
         res.status(403).json("You cant follow yourself");
     }
-
 })
 
 
 //Unfollow User
+router.put("/:id/follow", async(req, res) => {
+    if (req.body.userId !== req.params.id) {
+        try {
+            const user = await findById(req.params.id);
+            const currentUser = await User.findById(req.body.userId);
+            if (!user.followers.includes(req.body.userId)) {
+                await user.updateOne({ $push: { followers: req.body.userId } });
+                await currentUser.updateOne({ $push: { followings: req.params.id } });
+                res.status(200).json("user has been followed")
+            } else { res.status(403).json("you allReady follow this user..!!") }
+        } catch (e) {
+            console.log(e);
+            return res.status(500).json(e);
+        }
+    } else {
+        res.status(403).json("You cant follow yourself");
+    }
+})
+
 
 
 module.exports = router;
