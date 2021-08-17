@@ -26,11 +26,31 @@
 
 .navbarright {
     flex: 4;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: white;
 }
 
 .navbarimg {
     width: 32px;
     height: 32px;
+}
+
+.navbarlink {
+    margin-right: 10px;
+    font-style: 14px;
+    cursor: pointer;
+}
+
+.navbaricons {
+    display: flex;
+}
+
+.navbaricon {
+    margin-right: 15px;
+    cursor: pointer;
+    position: relative;
 }
 
 .searchbar {
