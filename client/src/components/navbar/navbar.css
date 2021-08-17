@@ -35,6 +35,9 @@
 .navbarimg {
     width: 32px;
     height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
 }
 
 .navbarlink {
@@ -45,6 +48,21 @@
 
 .navbaricons {
     display: flex;
+}
+
+.navbariconbadge {
+    width: 15px;
+    height: 15px;
+    background-color: red;
+    border-radius: 50%;
+    color: white;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
 }
 
 .navbaricon {
