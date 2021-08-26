@@ -1,4 +1,4 @@
-import Navbar from "../../components/navbar/navbar";
+import Topbar from "../../components/navbar/navbar";
 import Sidebar from "../../components/sidebar/sidebar";
 import Feed from "../../components/feed/feed";
 import Rightbar from "../../components/rightbar/rightbar";
@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <>
       <div>
-        <Navbar />
+        <Topbar />
         <div className="homecont">
           <Sidebar />
           <Feed />
