@@ -61,11 +61,15 @@ export default function Topbar() {
           </div>
         </div> */}
         <Link
-          to={`/profile/${user.username}`}
+          to="/"
+          // to={`/profile/${user.username}`}
           style={{
             textDecoration: "none",
             color: "white",
             fontWeight: "700",
+          }}
+          onClick={() => {
+            localStorage.removeItem("Wuphfuser");
           }}
         >
           {/* <img
