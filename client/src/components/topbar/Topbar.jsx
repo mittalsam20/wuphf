@@ -6,7 +6,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 export default function Topbar() {
   const { user } = useContext(AuthContext);
-  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  // const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -46,7 +46,7 @@ export default function Topbar() {
             <span className="topbarLink">Timeline</span>
           </Link>
         </div>
-        <div className="topbarIcons">
+        {/* <div className="topbarIcons">
           <div className="topbarIconItem">
             <Person />
             <span className="topbarIconBadge">1</span>
@@ -59,7 +59,7 @@ export default function Topbar() {
             <Notifications />
             <span className="topbarIconBadge">1</span>
           </div>
-        </div>
+        </div> */}
         <Link
           to={`/profile/${user.username}`}
           style={{
